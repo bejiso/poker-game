@@ -14,6 +14,14 @@ public class Card {
         return faceValue.value;
     }
 
+    public FaceValue getFaceValue() {
+        return faceValue;
+    }
+
+    public Suit getSuit() {
+        return suit;
+    }
+
 
     enum Suit{
         HEARTS,

@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Shoe {
     private List<Card> allDecksCards = new ArrayList();
-    private AtomicInteger dealingCursor ;
+    private AtomicInteger dealingCursor=new AtomicInteger() ;
 
     public void addDeck(Deck deck) {
         allDecksCards.addAll(deck.getCards());

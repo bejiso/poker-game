@@ -46,7 +46,7 @@ public class PokerService {
         return pokerInteractor.dealCardsToPlayer(gameId,playerId,amountsCard);
      }
 
-    @GetMapping("game/{gameId}/playerId/{playerId}/cards")
+    @GetMapping("game/{gameId}/player/{playerId}/cards")
     public List<Card> playerCards(@PathVariable("gameId")int gameId,
                                   @PathVariable("playerId") int playerId){
         return pokerInteractor.playerCards(gameId, playerId);
