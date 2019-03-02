@@ -60,42 +60,58 @@ public class PokerInteractor {
     }
   }
 
-  public int addPlayerToGame(int gameId){
-      Game game=gamesById.get(gameId);
-      if(game!=null){
-          int newPlayerId=playerIdProvider.getAndIncrement();
-          game.addPlayer(new Player(newPlayerId));
-          return newPlayerId;
+  public int addPlayerToGame(int gameId) {
+    Game game = gamesById.get(gameId);
+    if (game != null) {
+      int newPlayerId = playerIdProvider.getAndIncrement();
+      game.addPlayer(new Player(newPlayerId));
+      return newPlayerId;
     }
+    throw new RuntimeException("game with id " + gameId + " doesn't exist");
+  }
+
+  public int dealCardsToPlayer(int gameId, int playerId, int cardAmounts) {
+    Game game = gamesById.get(gameId);
+    if (game != null) {
+      Player player = game.getPlayer(playerId);
+      return game.dealCardsToPlayer(playerId, cardAmounts);
+    } else {
       throw new RuntimeException("game with id " + gameId + " doesn't exist");
-
+    }
   }
 
-  public int dealCardsToPlayer(int gameId, int playerId, int cardAmounts){
-      Game game=gamesById.get(gameId);
-      if(game!=null){
-          Player player=game.getPlayer(playerId);
-              return game.dealCardsToPlayer(playerId,cardAmounts);
-      }else{
-          throw new RuntimeException("game with id "+gameId+" doesn't exist");
-      }
+  public List<Card> playerCards(int gameId, int playerId) {
+    Game game = gamesById.get(gameId);
+    if (game != null) {
+      Player player = game.getPlayer(playerId);
+      return player.getCards();
+    }
+    throw new RuntimeException("player or game doesnt exist");
   }
 
-  public List<Card> playerCards(int gameId, int playerId){
-      Game game=gamesById.get(gameId);
-      if(game!=null){
-          Player player=game.getPlayer(playerId);
-          return player.getCards();
-      }
-      throw new RuntimeException("player or game doesnt exist");
-
+  public List<SuitCount> undealtCardsBySuits(int gameId) {
+    Game game = gamesById.get(gameId);
+    if (game != null) {
+      Shoe shoe = game.getShoe();
+      shoe.getUndealtCardBySuit();
+    }
+    throw new RuntimeException("game with id " + gameId + " doesn't exist");
   }
 
-   public void shuffle(int gameId){
-      Game game=gamesById.get(gameId);
-      if(game!=null){
-          game.shuffleShoe();
-      }
-      throw new RuntimeException("game with id "+gameId+" doesn't exist");
-   }
+  public List<Card> undealtCards(int gameId) {
+    Game game = gamesById.get(gameId);
+    if (game != null) {
+      Shoe shoe = game.getShoe();
+      shoe.getUndealtCard();
+    }
+    throw new RuntimeException("game with id " + gameId + " doesn't exist");
+  }
+
+  public void shuffle(int gameId) {
+    Game game = gamesById.get(gameId);
+    if (game != null) {
+      game.shuffleShoe();
+    }
+    throw new RuntimeException("game with id " + gameId + " doesn't exist");
+  }
 }
