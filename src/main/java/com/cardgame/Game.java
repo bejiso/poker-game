@@ -13,7 +13,6 @@ public class Game {
   private Shoe shoe = new Shoe();
   private Map<Integer, Player> playersById = new ConcurrentHashMap();
 
-
   public Game(int id) {
     this.id = id;
   }

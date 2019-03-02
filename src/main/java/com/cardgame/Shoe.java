@@ -8,11 +8,11 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Shoe {
   private List<Card> allDecksCards = new ArrayList();
   private AtomicInteger dealingCursor = new AtomicInteger();
-  private Set<Integer> idDecksList=new HashSet<Integer>();
+  private Set<Integer> idDecksList = new HashSet<Integer>();
   private Lock shuffleLock = new ReentrantLock();
 
   public void addDeck(Deck deck) {
-    if(!idDecksList.contains(deck.getId())){
+    if (!idDecksList.contains(deck.getId())) {
       allDecksCards.addAll(deck.getCards());
       idDecksList.add(deck.getId());
     }

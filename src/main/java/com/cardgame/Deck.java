@@ -12,7 +12,7 @@ public class Deck {
     this.deckCards = CardsUtil.deckCards();
   }
 
-  public int getId(){
+  public int getId() {
     return this.id;
   }
 

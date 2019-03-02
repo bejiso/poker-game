@@ -12,7 +12,6 @@ public class CardsUtil {
   static final int MIN_SHUFFLE_ITER = 10;
   static final int MAX_SHUFFLE_ITER = 50;
 
-
   public static List<Card> deckCards() {
     List<Card> deckCards = new ArrayList<Card>();
     for (Card.Suit suit : Card.Suit.values()) {
@@ -30,8 +29,8 @@ public class CardsUtil {
     rand = new Random();
 
     for (int i = 0; i < nbIterations; i++) {
-      int firstCard = rand.nextInt((nbCards - startingPosition) ) + startingPosition;
-      int secondCard = rand.nextInt((nbCards - startingPosition) ) + startingPosition;
+      int firstCard = rand.nextInt((nbCards - startingPosition)) + startingPosition;
+      int secondCard = rand.nextInt((nbCards - startingPosition)) + startingPosition;
       Collections.swap(cards, firstCard, secondCard);
     }
     return cards;

@@ -14,7 +14,6 @@ public class PokerInteractor {
   private final AtomicInteger deckIdProvider = new AtomicInteger();
   private final AtomicInteger playerIdProvider = new AtomicInteger();
 
-
   /*
      games store
   */
@@ -22,7 +21,7 @@ public class PokerInteractor {
   /*
      decks store
   */
-  private final Map<Integer,Deck> decks = new ConcurrentHashMap<Integer,Deck>();
+  private final Map<Integer, Deck> decks = new ConcurrentHashMap<Integer, Deck>();
 
   public List<Score> gameScores(int gameId) {
     Game game = gamesById.get(gameId);
@@ -44,7 +43,7 @@ public class PokerInteractor {
 
   public int createDeck() {
     int newDeckId = deckIdProvider.getAndIncrement();
-    decks.put(newDeckId,new Deck(newDeckId));
+    decks.put(newDeckId, new Deck(newDeckId));
     return newDeckId;
   }
 
@@ -114,9 +113,8 @@ public class PokerInteractor {
     Game game = gamesById.get(gameId);
     if (game != null) {
       game.shuffleShoe();
-    }else{
+    } else {
       throw new RuntimeException("game with id " + gameId + " doesn't exist");
     }
-
   }
 }
