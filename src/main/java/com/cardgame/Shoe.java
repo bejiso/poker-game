@@ -6,9 +6,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Shoe {
   private List<Card> allDecksCards = new ArrayList();
   private AtomicInteger dealingCursor = new AtomicInteger();
+  private Set<Integer> idDecksList=new HashSet<Integer>();
 
   public void addDeck(Deck deck) {
-    allDecksCards.addAll(deck.getCards());
+    if(!idDecksList.contains(deck.getId())){
+      allDecksCards.addAll(deck.getCards());
+      idDecksList.add(deck.getId());
+    }
   }
 
   public List<Card> nextCards(int amount) {

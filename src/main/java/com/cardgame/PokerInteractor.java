@@ -19,7 +19,7 @@ public class PokerInteractor {
   /*
      decks store
   */
-  private final List<Deck> decks = new ArrayList<Deck>();
+  private final Map<Integer,Deck> decks = new ConcurrentHashMap<Integer,Deck>();
 
   public List<Score> gameScores(int gameId) {
     Game game = gamesById.get(gameId);
@@ -41,7 +41,7 @@ public class PokerInteractor {
 
   public int createDeck() {
     int newDeckId = deckIdProvider.getAndIncrement();
-    decks.add(new Deck(newDeckId));
+    decks.put(newDeckId,new Deck(newDeckId));
     return newDeckId;
   }
 

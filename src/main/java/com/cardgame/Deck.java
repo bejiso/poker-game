@@ -12,6 +12,10 @@ public class Deck {
     this.deckCards = CardsUtil.deckCards();
   }
 
+  public int getId(){
+    return this.id;
+  }
+
   public List<Card> getCards() {
     return deckCards;
   }
