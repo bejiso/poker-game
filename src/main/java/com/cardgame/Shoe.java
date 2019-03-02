@@ -2,11 +2,14 @@ package com.cardgame;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Shoe {
   private List<Card> allDecksCards = new ArrayList();
   private AtomicInteger dealingCursor = new AtomicInteger();
   private Set<Integer> idDecksList=new HashSet<Integer>();
+  private Lock shuffleLock = new ReentrantLock();
 
   public void addDeck(Deck deck) {
     if(!idDecksList.contains(deck.getId())){
@@ -16,14 +19,19 @@ public class Shoe {
   }
 
   public List<Card> nextCards(int amount) {
-    List<Card> dealtCards = new ArrayList<Card>();
-    int dealtCardsAmount = 0;
-    while (dealtCardsAmount < amount && dealingCursor.get() < allDecksCards.size()) {
-      dealtCards.add(allDecksCards.get(dealingCursor.get()));
-      dealtCardsAmount++;
-      dealingCursor.getAndIncrement();
+    try {
+      shuffleLock.lock();
+      List<Card> dealtCards = new ArrayList<Card>();
+      int dealtCardsAmount = 0;
+      while (dealtCardsAmount < amount && dealingCursor.get() < allDecksCards.size()) {
+        dealtCards.add(allDecksCards.get(dealingCursor.get()));
+        dealtCardsAmount++;
+        dealingCursor.getAndIncrement();
+      }
+      return dealtCards;
+    } finally {
+      shuffleLock.unlock();
     }
-    return dealtCards;
   }
 
   public List<SuitCount> getUndealtCardBySuit() {
@@ -56,6 +64,12 @@ public class Shoe {
 
   public void shuffle() {
 
-    this.allDecksCards = CardsUtil.shuffle(allDecksCards, (int)dealingCursor.get(),allDecksCards.size() );
+    try {
+      shuffleLock.lock();
+      this.allDecksCards =
+          CardsUtil.shuffle(allDecksCards, dealingCursor.get(), allDecksCards.size());
+    } finally {
+      shuffleLock.unlock();
+    }
   }
 }

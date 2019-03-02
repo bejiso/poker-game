@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class CardsUtil {
 
   static final int MIN_SHUFFLE_ITER = 10;
   static final int MAX_SHUFFLE_ITER = 50;
+
 
   public static List<Card> deckCards() {
     List<Card> deckCards = new ArrayList<Card>();
