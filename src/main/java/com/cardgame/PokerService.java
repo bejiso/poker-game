@@ -66,8 +66,8 @@ public class PokerService {
     return pokerInteractor.undealtCards(gameId);
   }
 
-  @GetMapping("/game/{gameId}/shuffle")
-  public void shuffle(int gameId) {
+  @PutMapping("/game/{gameId}/shuffle")
+  public void shuffle(@PathVariable("gameId") int gameId) {
     pokerInteractor.shuffle(gameId);
   }
 }

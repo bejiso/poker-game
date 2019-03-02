@@ -9,7 +9,6 @@ public class CardsUtil {
 
   static final int MIN_SHUFFLE_ITER = 10;
   static final int MAX_SHUFFLE_ITER = 50;
-  static final int NB_PACK_CARDS = 52;
 
   public static List<Card> deckCards() {
     List<Card> deckCards = new ArrayList<Card>();
@@ -21,15 +20,15 @@ public class CardsUtil {
     return deckCards;
   }
 
-  public static List<Card> shuffle(List<Card> cards, int startingPosition) {
+  public static List<Card> shuffle(List<Card> cards, int startingPosition, int nbCards) {
 
     Random rand = new Random();
     int nbIterations = rand.nextInt((MAX_SHUFFLE_ITER - MIN_SHUFFLE_ITER) + 1) + MIN_SHUFFLE_ITER;
     rand = new Random();
 
     for (int i = 0; i < nbIterations; i++) {
-      int firstCard = rand.nextInt((NB_PACK_CARDS - startingPosition) + 1) + startingPosition;
-      int secondCard = rand.nextInt((NB_PACK_CARDS - startingPosition) + 1) + startingPosition;
+      int firstCard = rand.nextInt((nbCards - startingPosition) ) + startingPosition;
+      int secondCard = rand.nextInt((nbCards - startingPosition) ) + startingPosition;
       Collections.swap(cards, firstCard, secondCard);
     }
     return cards;

@@ -93,7 +93,7 @@ public class PokerInteractor {
     Game game = gamesById.get(gameId);
     if (game != null) {
       Shoe shoe = game.getShoe();
-      shoe.getUndealtCardBySuit();
+      return shoe.getUndealtCardBySuit();
     }
     throw new RuntimeException("game with id " + gameId + " doesn't exist");
   }
@@ -102,7 +102,7 @@ public class PokerInteractor {
     Game game = gamesById.get(gameId);
     if (game != null) {
       Shoe shoe = game.getShoe();
-      shoe.getUndealtCard();
+      return shoe.getUndealtCard();
     }
     throw new RuntimeException("game with id " + gameId + " doesn't exist");
   }
@@ -111,7 +111,9 @@ public class PokerInteractor {
     Game game = gamesById.get(gameId);
     if (game != null) {
       game.shuffleShoe();
+    }else{
+      throw new RuntimeException("game with id " + gameId + " doesn't exist");
     }
-    throw new RuntimeException("game with id " + gameId + " doesn't exist");
+
   }
 }

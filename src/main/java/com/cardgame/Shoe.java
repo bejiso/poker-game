@@ -52,6 +52,6 @@ public class Shoe {
 
   public void shuffle() {
 
-    this.allDecksCards = CardsUtil.shuffle(allDecksCards, dealingCursor.get());
+    this.allDecksCards = CardsUtil.shuffle(allDecksCards, (int)dealingCursor.get(),allDecksCards.size() );
   }
 }
